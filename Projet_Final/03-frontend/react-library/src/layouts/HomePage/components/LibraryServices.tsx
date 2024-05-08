@@ -4,7 +4,13 @@
  * See the LICENSE file for more information.
  */
 
+import { useOktaAuth } from "@okta/okta-react"
+import { Link } from "react-router-dom";
+
 export const LibraryServices = () => {
+
+    const { authState } = useOktaAuth();
+
 
     return (
 
@@ -19,9 +25,15 @@ export const LibraryServices = () => {
                     </p>
             
                     <div className="d-grid gap-2 justify-content-md-start mb-4 mb-lg-3">
-                        <a href="/" className="btn main-color btn-lg text-white">
-                            Sign Up
-                        </a>
+                        {authState?.isAuthenticated ?
+                            <Link to="#" type="button" className="btn main-color btn-lg px-4 me-md-2 fw-bold text-white">
+                                Library Services 
+                            </Link>
+                            :
+                            <Link to="/login" className="btn main-color btn-lg text-white">
+                                Sign Up
+                            </Link>
+                        }
                     </div>
                 </div>
                 <div className="col-lg-4 offset-lg-1 shadow-lg lost-image"></div>
