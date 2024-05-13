@@ -17,6 +17,14 @@
 
 ![category](images/search_by_category.jpeg)
 
+# Authentification
+
+![Authentification](images/authentification.jpeg)
+
 # Révision sur la page de paiement du livre
 
-![checkout](./images/checkout.jpeg)
+![checkout](./images/review_page.jpeg)
+
+# Page Personnelle du client
+
+![Self Page](images/self_page.jpeg)

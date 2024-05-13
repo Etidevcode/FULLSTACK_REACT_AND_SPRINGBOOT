@@ -36,7 +36,6 @@ public class SecurityConfiguration {
 		// Force a non-empty response body for 401's to make the reponse friendly
 		Okta.configureResourceServer401ResponseBody(http);
 
-
 		return http.build();
 	}
 }
