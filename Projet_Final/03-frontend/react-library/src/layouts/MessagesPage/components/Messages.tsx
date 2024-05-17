@@ -13,21 +13,21 @@ import { Pagination } from "../../Utils/Pagination";
 export const Messages = () => {
 
     const { authState } = useOktaAuth();
-    const [ isLoadingMessages, setIsLoadingMessages ] = useState(true);
-    const [ httpError, setHttpError ] = useState(null);
+    const [isLoadingMessages, setIsLoadingMessages] = useState(true);
+    const [httpError, setHttpError] = useState(null);
 
     // Messages
-    const [ messages, setMessages ] = useState<MessageModel[]>([]);
+    const [messages, setMessages] = useState<MessageModel[]>([]);
 
     // Pagination
-    const [ messagesPerPage ] = useState(5);
-    const [ currentPage, setCurrentPage ] = useState(1);
-    const[ totalPages, setTotalPages ] = useState(0);
+    const [messagesPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
         const fetchUserMessages = async () => {
             if (authState && authState?.isAuthenticated) {
-                const url = `http://localhost:8080/api/messages/search/findByUserEmail/?userEmail=${authState?.accessToken?.claims.sub}&page=${currentPage - 1}&size=${messagesPerPage}`;
+                const url = `${process.env.REACT_APP_API}/messages/search/findByUserEmail/?userEmail=${authState?.accessToken?.claims.sub}&page=${currentPage - 1}&size=${messagesPerPage}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -45,20 +45,20 @@ export const Messages = () => {
             }
             setIsLoadingMessages(false);
         }
-        fetchUserMessages().catch((error:any) => {
+        fetchUserMessages().catch((error: any) => {
             setIsLoadingMessages(false);
             setHttpError(error.message);
         })
         window.scrollTo(0, 0);
-    }, [ authState, currentPage]);
+    }, [authState, currentPage]);
 
     if (isLoadingMessages) {
         return (
-            <SpinnerLoading/>
+            <SpinnerLoading />
         );
     }
 
-    if(httpError){
+    if (httpError) {
         return (
             <div className="container m-5">
                 <p>{httpError}</p>
@@ -70,7 +70,7 @@ export const Messages = () => {
 
     return (
         <div className='mt-2'>
-            {messages.length > 0 ? 
+            {messages.length > 0 ?
                 <>
                     <h5>Current Q/A: </h5>
                     {messages.map(message => (
@@ -79,10 +79,10 @@ export const Messages = () => {
                                 <h5>Case #{message.id}: {message.title}</h5>
                                 <h6>{message.userEmail}</h6>
                                 <p>{message.question}</p>
-                                <hr/>
+                                <hr />
                                 <div>
                                     <h5>Response: </h5>
-                                    {message.response && message.adminEmail ? 
+                                    {message.response && message.adminEmail ?
                                         <>
                                             <h6>{message.adminEmail} (admin)</h6>
                                             <p>{message.response}</p>
@@ -98,7 +98,7 @@ export const Messages = () => {
                 :
                 <h5>All questions you submit will be shown here</h5>
             }
-            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate}/>}
+            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />}
         </div>
 
     );

@@ -26,7 +26,7 @@ export const SearchBooksPage = () => {
     useEffect(() => {
 
         const fetchBooks = async () => {
-            const baseUrl: string = "http://localhost:8080/api/books";
+            const baseUrl: string = `${process.env.REACT_APP_API}/books`;
 
             let url: string = '';
 
@@ -102,9 +102,9 @@ export const SearchBooksPage = () => {
     const categoryField = (value: string) => {
         setCurrentPage(1);
         if (
-            value.toLowerCase() === 'fe' || 
-            value.toLowerCase() === 'be' || 
-            value.toLowerCase() === 'data' || 
+            value.toLowerCase() === 'fe' ||
+            value.toLowerCase() === 'be' ||
+            value.toLowerCase() === 'data' ||
             value.toLowerCase() === 'devops'
         ) {
             setCategorySelection(value);

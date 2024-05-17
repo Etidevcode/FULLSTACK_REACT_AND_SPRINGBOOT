@@ -3,7 +3,7 @@ import './App.css';
 import { Navbar } from './layouts/NavbarAndFooter/Navbar';
 import { Footer } from './layouts/NavbarAndFooter/Footer';
 import { SearchBooksPage } from './layouts/SearchBooksPage/SearchBooksPage';
-import { HomePage } from './layouts/HomePage/Homepage';
+
 import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import { BookCheckoutPage } from './layouts/BookCheckoutPage/BookCheckoutPage';
 import { oktaConfig } from './lib/oktaConfig';
@@ -14,6 +14,8 @@ import { ReviewListPage } from './layouts/BookCheckoutPage/ReviewListPage/Review
 import { ShelfPage } from './layouts/ShelfPage/ShelfPage';
 import { MessagesPage } from './layouts/MessagesPage/MessagesPage';
 import { ManageLibraryPage } from './layouts/ManageLibraryPage/ManageLibraryPage';
+import { PaymentPage } from './layouts/PaymentPage/PaymentPage';
+import { HomePage } from './layouts/HomePage/HomePage';
 
 const oktaAuth = new OktaAuth(oktaConfig);
 
@@ -65,6 +67,7 @@ export const App = () => {
           <SecureRoute path='/shelf'><ShelfPage/></SecureRoute>
           <SecureRoute path='/messages'><MessagesPage/></SecureRoute>
           <SecureRoute path='/admin'><ManageLibraryPage/></SecureRoute>
+          <SecureRoute path='/fees'><PaymentPage/></SecureRoute>
         </Switch>
       </div>
 

@@ -10,7 +10,7 @@ import MessageModel from "../../../models/MessageModel";
 
 
 export const PostNewMessage = () => {
-    
+
     const { authState } = useOktaAuth();
     const [title, setTitle] = useState('');
     const [question, setQuestion] = useState('');
@@ -18,7 +18,7 @@ export const PostNewMessage = () => {
     const [displaySuccess, setDisplaySuccess] = useState(false);
 
     async function submitNewQuestion() {
-        const url = `http://localhost:8080/api/messages/secure/add/message`;
+        const url = `${process.env.REACT_APP_API}/messages/secure/add/message`;
         if (authState?.isAuthenticated && title !== '' && question !== '') {
             const messageRequestModel: MessageModel = new MessageModel(title, question);
             const requestOptions = {
@@ -44,7 +44,7 @@ export const PostNewMessage = () => {
             setDisplaySuccess(false);
         }
     }
-    
+
     return (
         <div className='card mt-3'>
             <div className='card-header'>
@@ -52,12 +52,12 @@ export const PostNewMessage = () => {
             </div>
             <div className='card-body'>
                 <form method='POST'>
-                    {displayWarning && 
+                    {displayWarning &&
                         <div className='alert alert-danger' role='alert'>
                             All fields must be filled out
                         </div>
                     }
-                    {displaySuccess && 
+                    {displaySuccess &&
                         <div className='alert alert-success' role='alert'>
                             Question added successfully
                         </div>
@@ -66,15 +66,15 @@ export const PostNewMessage = () => {
                         <label className='form-label'>
                             Title
                         </label>
-                        <input type='text' className='form-control' id='exampleFormControlInput1' 
-                            placeholder='Title' onChange={e => setTitle(e.target.value)} value={title}/>
+                        <input type='text' className='form-control' id='exampleFormControlInput1'
+                            placeholder='Title' onChange={e => setTitle(e.target.value)} value={title} />
                     </div>
 
                     <div className='mb-3'>
                         <label className='form-label'>
                             Question
                         </label>
-                        <textarea className='form-control' id='exampleFormControlTextarea1' 
+                        <textarea className='form-control' id='exampleFormControlTextarea1'
                             rows={3} onChange={e => setQuestion(e.target.value)} value={question}>
                         </textarea>
                     </div>
